@@ -1,0 +1,33 @@
+@use "tokens" as *;
+
+.banner {
+  display: flex;
+  gap: $space-3;
+  align-items: flex-start;
+  padding: $space-3 $space-4;
+  border-radius: $radius-md;
+  border: 1px solid $border-subtle;
+  background: rgba(95, 163, 122, 0.08);
+  margin-bottom: $space-4;
+}
+
+.icon {
+  color: $accent-green;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.title {
+  font-size: $fs-sm;
+  font-weight: $fw-medium;
+  color: $text-primary;
+  margin-bottom: 4px;
+}
+
+.body {
+  margin: 0;
+  font-size: $fs-xs;
+  color: $text-secondary;
+  line-height: $lh-snug;
+  max-width: 80ch;
+}

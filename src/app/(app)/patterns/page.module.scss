@@ -172,3 +172,102 @@
   justify-content: flex-end;
   margin-top: $space-2;
 }
+
+.findingExplain {
+  margin-top: $space-3;
+  padding: $space-3;
+  border-radius: $radius-md;
+  border: 1px solid $border-subtle;
+  background: $bg-panel-2;
+  font-size: $fs-xs;
+  color: $text-secondary;
+}
+
+.explainPill {
+  margin-bottom: $space-2;
+  color: $text-tertiary;
+}
+
+.explainPillVal {
+  color: $accent-cyan;
+  text-transform: capitalize;
+}
+
+.explainLabel {
+  display: block;
+  font-size: $fs-2xs;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $text-tertiary;
+  margin-bottom: 6px;
+}
+
+.explainRules ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+.monoList {
+  @include mono;
+  font-size: $fs-2xs;
+  color: $text-secondary;
+}
+
+.explainDecision {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2 $space-3;
+  margin-top: $space-2;
+  font-size: $fs-2xs;
+
+  code {
+    @include mono;
+    color: $accent-cyan;
+  }
+}
+
+.inputsHash {
+  flex: 1 1 100%;
+  margin-top: 4px;
+  color: $text-tertiary;
+  @include mono;
+  font-size: $fs-2xs;
+}
+
+.explainAttr {
+  margin-top: $space-3;
+}
+
+.attrList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.attrRow {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: $space-2;
+  align-items: center;
+}
+
+.attrLabel {
+  min-width: 0;
+  color: $text-secondary;
+}
+
+.attrBarTrack {
+  height: 6px;
+  border-radius: 3px;
+  background: $bg-base;
+  overflow: hidden;
+}
+
+.attrBarFill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, rgba(74, 168, 200, 0.4), rgba(95, 163, 122, 0.7));
+}

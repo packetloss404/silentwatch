@@ -10,6 +10,7 @@ import { BarRow } from '@/components/ui/BarRow';
 import { SeverityBadge } from '@/components/ui/Severity';
 import { CheckCircle2, Clock, MoonStar, RefreshCw, Repeat, Sigma } from 'lucide-react';
 import { compact, relTime } from '@/lib/format';
+import { DataMinimizationBanner } from '@/components/governance/DataMinimizationBanner';
 import type { OccupancyEvent, PatternFinding, VehicleObservation } from '@/lib/types';
 import styles from './page.module.scss';
 
@@ -75,6 +76,8 @@ export default async function PatternsPage() {
           </>
         }
       />
+
+      <DataMinimizationBanner variant="patterns" />
 
       <section className={styles.stats}>
         <StatBlock
@@ -174,6 +177,7 @@ export default async function PatternsPage() {
                 <div className={styles.findingEvidence}>
                   <span>{p.evidence}</span>
                 </div>
+                <PatternExplainBlock p={p} />
                 <div className={styles.findingActions}>
                   <Button variant="ghost">Mute</Button>
                   <Button variant="subtle">Open incident</Button>
@@ -184,6 +188,8 @@ export default async function PatternsPage() {
           ))}
         </ul>
       </Panel>
+
+      {occHeatmaps.length > 0 && <DataMinimizationBanner variant="occupancy" />}
 
       <section className={styles.row2}>
         {occHeatmaps.map((z) => (
@@ -240,6 +246,70 @@ function sum2D(g: number[][]): number {
   let s = 0;
   for (const r of g) for (const v of r) s += v;
   return s;
+}
+
+function PatternExplainBlock({ p }: { p: PatternFinding }) {
+  if (!p.decision && !p.featureAttributions?.length && !p.matchedRuleIds?.length) {
+    return null;
+  }
+  const attrs = p.featureAttributions ?? [];
+  const maxA = Math.max(0.01, ...attrs.map((a) => Math.abs(a.contribution)));
+
+  return (
+    <div className={styles.findingExplain}>
+      {p.explanationMode && (
+        <div className={styles.explainPill}>
+          Mode: <span className={styles.explainPillVal}>{p.explanationMode}</span>
+        </div>
+      )}
+      {p.matchedRuleIds && p.matchedRuleIds.length > 0 && (
+        <div className={styles.explainRules}>
+          <span className={styles.explainLabel}>Rules</span>
+          <ul>
+            {p.matchedRuleIds.map((id) => (
+              <li key={id} className={styles.monoList}>{id}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {p.decision && (
+        <div className={styles.explainDecision}>
+          {p.decision.modelVersion && (
+            <span>Model <code>{p.decision.modelVersion}</code></span>
+          )}
+          {p.decision.rulesetVersion && (
+            <span>Ruleset <code>{p.decision.rulesetVersion}</code></span>
+          )}
+          {p.decision.score != null && p.decision.threshold != null && (
+            <span>
+              Score {p.decision.score} / threshold {p.decision.threshold}
+            </span>
+          )}
+          {p.decision.inputsHash && (
+            <div className={styles.inputsHash}>Inputs: {p.decision.inputsHash}</div>
+          )}
+        </div>
+      )}
+      {attrs.length > 0 && (
+        <div className={styles.explainAttr}>
+          <span className={styles.explainLabel}>Feature contributions (relative)</span>
+          <ul className={styles.attrList}>
+            {attrs.map((a) => (
+              <li key={a.featureId} className={styles.attrRow}>
+                <div className={styles.attrLabel}>{a.label}</div>
+                <div className={styles.attrBarTrack}>
+                  <div
+                    className={styles.attrBarFill}
+                    style={{ width: `${(Math.abs(a.contribution) / maxA) * 100}%` }}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
 }
 
 function kindLabel(k: PatternFinding['kind']): string {

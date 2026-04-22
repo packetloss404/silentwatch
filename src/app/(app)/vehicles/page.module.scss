@@ -201,3 +201,10 @@
   font-size: $fs-md;
   text-transform: capitalize;
 }
+
+.readQualityNote {
+  margin: 0 0 $space-3;
+  font-size: $fs-xs;
+  color: $text-tertiary;
+  line-height: $lh-snug;
+}

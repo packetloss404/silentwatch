@@ -74,6 +74,13 @@ export default async function ReportsPage() {
               <div className={styles.tileTitle}>Change log</div>
               <p className={styles.tileBody}>Configuration, asset, and watchlist diffs for compliance reviews.</p>
             </button>
+            <button className={styles.tile}>
+              <Badge tone="green" size="sm">GOV</Badge>
+              <div className={styles.tileTitle}>Oversight &amp; custody</div>
+              <p className={styles.tileBody}>
+                Redacted audit chain, pattern decision records, and retention report for boards and reviewers.
+              </p>
+            </button>
           </div>
           <div className={styles.builderFoot}>
             <div className={styles.builderHint}>

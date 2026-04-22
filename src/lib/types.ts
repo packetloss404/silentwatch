@@ -138,6 +138,17 @@ export interface VehicleObservation {
   watchlistId?: ID;
   tags?: string[];
   notes?: string;
+  /** LPR / OCR health for this row’s camera path (defensive quality, not identity). */
+  readQuality?: LprReadQuality;
+}
+
+/** Edge pipeline quality for plate reads — per observation aggregate when available. */
+export interface LprReadQuality {
+  /** Mean OCR / detector confidence 0..1. */
+  confidenceAvg: number;
+  /** Share of partial / low-confidence reads 0..1. */
+  partialReadRate: number;
+  note?: string;
 }
 
 export interface WatchlistEntry {
@@ -191,6 +202,25 @@ export type PatternKind =
   | 'first-time-vehicle'
   | 'recurring-time-of-day';
 
+/** How a pattern finding was produced — supports governance and challenge workflows. */
+export interface PatternDecisionRecord {
+  modelVersion?: string;
+  rulesetVersion?: string;
+  /** Computed pattern score before threshold. */
+  score?: number;
+  /** Rule / model cut line for firing this finding. */
+  threshold?: number;
+  /** Hash of input aggregates at decision time (reproducibility). */
+  inputsHash?: string;
+}
+
+export interface PatternFeatureAttribution {
+  featureId: string;
+  label: string;
+  /** Relative contribution (implementation-defined scale; UI normalizes for display). */
+  contribution: number;
+}
+
 export interface PatternFinding {
   id: ID;
   siteId: ID;
@@ -203,6 +233,10 @@ export interface PatternFinding {
   zoneId?: ID;
   vehicleId?: ID;
   acknowledged: boolean;
+  decision?: PatternDecisionRecord;
+  featureAttributions?: PatternFeatureAttribution[];
+  matchedRuleIds?: string[];
+  explanationMode?: 'rule' | 'model' | 'hybrid';
 }
 
 // ─── Signal & network observations ─────────────────────────────────
@@ -231,10 +265,23 @@ export interface SignalObservation {
   trend: number;
   /** 0..100 */
   anomalyScore: number;
+  /**
+   * Optional transparent breakdown of how `anomalyScore` was built (governance / appeals).
+   * Sums of `pointsToward` are illustrative; the total is still `anomalyScore` on the row.
+   */
+  anomalyScoreComponents?: AnomalyScoreComponent[];
   tags?: string[];
   notes?: string;
   /** Per-hour observation counts for the last N hours (newest last). */
   history?: number[];
+}
+
+export interface AnomalyScoreComponent {
+  id: string;
+  label: string;
+  value: number;
+  /** Portion of the 0–100 score attributed to this factor (heuristic; may not sum to 100 if capped). */
+  pointsToward: number;
 }
 
 export interface NetworkObservation {

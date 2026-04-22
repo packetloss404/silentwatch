@@ -194,3 +194,19 @@
   align-items: center;
   gap: 6px;
 }
+
+.govList {
+  margin: 0;
+  padding-left: 1.25em;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  line-height: $lh-snug;
+
+  strong {
+    color: $text-primary;
+    font-weight: $fw-medium;
+  }
+}

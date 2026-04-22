@@ -230,6 +230,37 @@ export function SignalsView({ signals, alerts }: { signals: SignalObservation[];
               </div>
             </div>
 
+            {sel.anomalyScoreComponents && sel.anomalyScoreComponents.length > 0 && (
+              <Panel title="Anomaly score — factors" padded>
+                <p className={styles.explainIntro}>
+                  Illustrative breakdown for appeals and calibration. Total row score is still <strong>{sel.anomalyScore}</strong>.
+                </p>
+                <ul className={styles.scoreFactors}>
+                  {sel.anomalyScoreComponents.map((c) => (
+                    <li key={c.id} className={styles.scoreFactorRow}>
+                      <div>
+                        <div className={styles.scoreFactorLabel}>{c.label}</div>
+                        <div className={styles.scoreFactorVal}>
+                          value {typeof c.value === 'number' && !Number.isInteger(c.value) ? c.value.toFixed(2) : c.value}
+                        </div>
+                      </div>
+                      <div className={styles.scoreFactorPts}>
+                        <span className={styles.mono}>+{c.pointsToward}</span>
+                        <span className={styles.scoreFactorBar}>
+                          <span
+                            className={styles.scoreFactorBarFill}
+                            style={{
+                              width: `${Math.min(100, (c.pointsToward / Math.max(sel.anomalyScore, 1)) * 100)}%`,
+                            }}
+                          />
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </Panel>
+            )}
+
             <Panel title="24h occurrence trend" padded>
               <div className={styles.bigSpark}>
                 <Sparkline

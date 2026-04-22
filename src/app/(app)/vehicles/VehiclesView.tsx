@@ -249,6 +249,19 @@ export function VehiclesView({ vehicles, watchlist, assets }: Props) {
               </div>
             </div>
 
+            {sel.readQuality && (
+              <Panel title="LPR read quality (edge aggregate)" padded>
+                <p className={styles.readQualityNote}>
+                  Quality metrics for the capture path on this row — used for pipeline health, not identity.
+                </p>
+                <KVList>
+                  <KV label="Mean confidence">{Math.round(sel.readQuality.confidenceAvg * 100)}%</KV>
+                  <KV label="Partial read rate">{Math.round(sel.readQuality.partialReadRate * 100)}%</KV>
+                  {sel.readQuality.note && <KV label="Note">{sel.readQuality.note}</KV>}
+                </KVList>
+              </Panel>
+            )}
+
             <Panel title="Hour-of-day pattern" padded>
               <div style={{ ['--cols' as any]: 24 }}>
                 <BarRow

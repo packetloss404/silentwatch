@@ -660,6 +660,12 @@ function buildSignals(): SignalObservation[] {
     count: 412,
     trend: 0.62,
     anomalyScore: 84,
+    anomalyScoreComponents: [
+      { id: 'c1', label: 'SSID similarity to inventory (score)', value: 0.91, pointsToward: 28 },
+      { id: 'c2', label: 'BSSID not in approved CMDB', value: 1, pointsToward: 22 },
+      { id: 'c3', label: 'RSSI in campus interior range (strong)', value: -71, pointsToward: 18 },
+      { id: 'c4', label: '24h count trend (σ vs site)', value: 0.62, pointsToward: 16 },
+    ],
     tags: ['ssid-similarity', 'rogue-candidate'],
     notes: 'SSID resembles corporate network but BSSID is not in inventory. Candidate evil-twin AP.',
     history: makeHistory(),
@@ -1386,7 +1392,7 @@ function buildVehicles(): VehicleObservation[] {
       : seed.classification === 'expected' ? intBetween(r, 30, 240)
       : intBetween(r, 7, 90);
 
-    out.push({
+    const base: VehicleObservation = {
       id: `veh_${idx + 1}`,
       siteId: site.id,
       plateMasked: maskPlate(seed.plate),
@@ -1407,7 +1413,15 @@ function buildVehicles(): VehicleObservation[] {
       watchlistId: seed.watchlistId,
       tags: seed.tags,
       notes: seed.notes,
-    });
+    };
+    if (idx === 13) {
+      base.readQuality = {
+        confidenceAvg: 0.78,
+        partialReadRate: 0.08,
+        note: 'Per-camera aggregate for LPR capture path — glare at night; no raw image stored in SilentWatch.',
+      };
+    }
+    out.push(base);
   }
   return out;
 }
@@ -1482,6 +1496,20 @@ const patterns: PatternFinding[] = [
     zoneId: 'z_perimeter_n',
     vehicleId: 'veh_14',
     acknowledged: false,
+    explanationMode: 'hybrid',
+    matchedRuleIds: ['pat_after_hours_vehicle_v2', 'dwell_bucket_gt_600s'],
+    decision: {
+      modelVersion: 'pat-classifier-1.2.0',
+      rulesetVersion: '2026-04-01',
+      score: 78,
+      threshold: 55,
+      inputsHash: 'a3f9…91 — visits_by_hour(7d), zone=z_perimeter_n',
+    },
+    featureAttributions: [
+      { featureId: 'night_window_mass', label: 'Share of reads in 02:00–03:00', contribution: 0.42 },
+      { featureId: 'nights_active', label: 'Nights with activity (of 7)', contribution: 0.31 },
+      { featureId: 'dwell_p95', label: 'Dwell p95 vs zone baseline', contribution: 0.27 },
+    ],
   },
   {
     id: 'pat_2',
@@ -1519,6 +1547,13 @@ const patterns: PatternFinding[] = [
     detectedAt: new Date(Date.now() - 11 * 3600000).toISOString(),
     zoneId: 'z_main_yard',
     acknowledged: true,
+    explanationMode: 'rule',
+    matchedRuleIds: ['occ_after_hours_baseline_v1'],
+    decision: { rulesetVersion: '2026-04-01', score: 44, threshold: 40, inputsHash: '8c1…22 — count-only bucket' },
+    featureAttributions: [
+      { featureId: 'after_hours_flag', label: 'Outside documented operating hours', contribution: 0.55 },
+      { featureId: 'no_badge_correlation', label: 'No access-controller event in window', contribution: 0.45 },
+    ],
   },
   {
     id: 'pat_5',

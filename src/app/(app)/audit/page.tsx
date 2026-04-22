@@ -182,6 +182,23 @@ export default async function AuditPage() {
           </ul>
         </Panel>
       )}
+
+      <Panel title="Governance & anti-abuse (roadmap)" subtitle="Controls that keep this system from becoming a dragnet">
+        <ul className={styles.govList}>
+          <li>
+            <strong>Two-person control</strong> — Baseline activation and bulk reclassify should require a second approver (maker–checker).
+          </li>
+          <li>
+            <strong>Tamper-evident audit</strong> — Append-only operator log with export verification for oversight bodies.
+          </li>
+          <li>
+            <strong>Watchlist justification</strong> — Require documented reason and optional expiry for &ldquo;flag&rdquo; entries; rate-limit bulk adds.
+          </li>
+          <li>
+            <strong>Pattern challenge</strong> — Formal dispute path for automated pattern findings before they inform policy.
+          </li>
+        </ul>
+      </Panel>
     </PageContainer>
   );
 }
