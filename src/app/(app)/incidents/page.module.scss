@@ -1,0 +1,232 @@
+.layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: $space-3;
+  align-items: start;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.queuePanel {
+  position: sticky;
+  top: $topbar-height + $space-4;
+  max-height: calc(100vh - #{$topbar-height} - #{$space-7});
+  display: flex;
+  flex-direction: column;
+}
+
+.queue {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  @include scrollbar;
+}
+
+.queueItem {
+  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  color: inherit;
+
+  &:hover { background: $bg-panel-2; }
+}
+
+.queueItemActive {
+  background: rgba(74, 168, 200, 0.08);
+  box-shadow: inset 2px 0 0 $accent-cyan;
+}
+
+.queueRow1 {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.queueId {
+  @include mono;
+  font-size: $fs-2xs;
+  color: $text-tertiary;
+}
+
+.queueTitle {
+  color: $text-primary;
+  font-size: $fs-sm;
+  font-weight: $fw-medium;
+}
+
+.queueMeta {
+  font-size: $fs-xs;
+  color: $text-tertiary;
+  display: flex;
+  gap: 6px;
+}
+
+.queueEmpty {
+  padding: $space-6;
+  text-align: center;
+  color: $text-tertiary;
+  font-size: $fs-sm;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.summary {
+  margin: 0 0 $space-3;
+  color: $text-secondary;
+  line-height: $lh-snug;
+  font-size: $fs-sm;
+}
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.alertList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: $space-3;
+    align-items: center;
+    padding: $space-3 $space-4;
+    border-bottom: 1px solid $border-subtle;
+
+    &:last-child { border-bottom: none; }
+  }
+}
+
+.alertTitle { color: $text-primary; font-size: $fs-sm; }
+.alertMeta  { color: $text-tertiary; font-size: $fs-xs; margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+.empty {
+  text-align: center;
+  color: $text-tertiary;
+  padding: $space-5 !important;
+  display: block !important;
+  grid-template-columns: 1fr !important;
+}
+
+/* timeline */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 $space-3;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: $border-subtle;
+  }
+}
+
+.tlItem {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: $space-3;
+  padding: $space-2 0 $space-4;
+  position: relative;
+}
+
+.tlIcon {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg-panel-2;
+  border: 1px solid $border-soft;
+  border-radius: 50%;
+  color: $accent-cyan;
+  z-index: 1;
+}
+
+.tlBody {
+  background: $bg-panel-2;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-3;
+}
+
+.tlHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-3;
+  margin-bottom: 4px;
+}
+
+.tlTitle { color: $text-primary; font-size: $fs-sm; font-weight: $fw-medium; }
+.tlTime  { color: $text-tertiary; font-size: $fs-xs; @include mono; }
+
+.tlText {
+  margin: 4px 0 6px;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  line-height: $lh-snug;
+}
+
+.tlMeta {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.mono { @include mono; font-size: $fs-2xs; color: $text-tertiary; }
+
+.composer {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  margin-top: $space-3;
+  padding-top: $space-3;
+  border-top: 1px solid $border-subtle;
+}
+
+.composerInput {
+  flex: 1 1 auto;
+  background: $bg-panel;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  height: 30px;
+  padding: 0 $space-3;
+  font-size: $fs-sm;
+  color: $text-primary;
+
+  &::placeholder { color: $text-tertiary; }
+
+  &:focus-visible {
+    border-color: rgba(74, 168, 200, 0.5);
+    box-shadow: 0 0 0 3px rgba(74,168,200,0.18);
+    outline: none;
+  }
+}

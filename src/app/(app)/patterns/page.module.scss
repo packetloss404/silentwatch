@@ -1,0 +1,174 @@
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-3;
+
+  @media (max-width: 1100px) { grid-template-columns: repeat(2, 1fr); }
+}
+
+.row1 {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: $space-3;
+
+  @media (max-width: 1280px) { grid-template-columns: 1fr; }
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+
+  @media (max-width: 1100px) { grid-template-columns: 1fr; }
+}
+
+/* Repeat-vehicle list */
+.repeatList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.repeatRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+  align-items: center;
+
+  &:last-child { border-bottom: none; }
+}
+
+.repeatPlate {
+  @include mono;
+  font-size: $fs-md;
+  letter-spacing: 0.04em;
+  color: $text-primary;
+}
+
+.repeatMeta {
+  font-size: $fs-xs;
+  color: $text-tertiary;
+  margin-top: 2px;
+  display: flex;
+  gap: 6px;
+  text-transform: capitalize;
+}
+
+.repeatRight {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.repeatHour {
+  width: 140px;
+}
+
+.repeatCount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 36px;
+}
+
+.repeatCountVal {
+  @include mono;
+  font-size: $fs-md;
+  color: $text-primary;
+  line-height: 1;
+}
+
+.repeatCountLabel {
+  @include section-title;
+}
+
+/* Findings */
+.findings {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.finding {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: $space-3;
+  padding: $space-4 $space-5;
+  border-bottom: 1px solid $border-subtle;
+
+  &:last-child { border-bottom: none; }
+}
+
+.findingIconWrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: $bg-panel-2;
+  border: 1px solid $border-soft;
+  color: $accent-cyan;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.findingBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.findingHead {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  margin-bottom: 2px;
+}
+
+.findingKind {
+  @include section-title;
+  color: $text-secondary;
+}
+
+.findingTime {
+  margin-left: auto;
+  font-size: $fs-xs;
+  color: $text-tertiary;
+}
+
+.findingSubject {
+  color: $text-primary;
+  font-size: $fs-md;
+  font-weight: $fw-medium;
+}
+
+.findingDetail {
+  margin: 0;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  line-height: $lh-snug;
+}
+
+.findingEvidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $fs-xs;
+  color: $accent-cyan;
+  @include mono;
+  padding: 4px 8px;
+  background: rgba(74, 168, 200, 0.06);
+  border: 1px dashed rgba(74, 168, 200, 0.35);
+  border-radius: $radius-sm;
+  width: max-content;
+  margin-top: 4px;
+}
+
+.findingActions {
+  display: flex;
+  gap: $space-2;
+  justify-content: flex-end;
+  margin-top: $space-2;
+}

@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-bottom: $space-5;
+}
+
+.left {
+  min-width: 0;
+}
+
+.eyebrow {
+  @include section-title;
+  margin-bottom: 6px;
+}
+
+.title {
+  margin: 0;
+  font-size: $fs-2xl;
+  font-weight: $fw-semi;
+  letter-spacing: -0.015em;
+  color: $text-primary;
+  line-height: 1.15;
+}
+
+.description {
+  margin: 6px 0 0;
+  color: $text-tertiary;
+  font-size: $fs-sm;
+  max-width: 720px;
+}
+
+.meta {
+  margin-top: $space-3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  font-size: $fs-xs;
+  color: $text-tertiary;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-shrink: 0;
+}

@@ -1,0 +1,128 @@
+@use "tokens" as *;
+@use "mixins" as *;
+
+/* CSS custom properties — runtime-themable handles for downstream consumers. */
+:root {
+  --sw-bg-base: #{$bg-base};
+  --sw-bg-canvas: #{$bg-canvas};
+  --sw-bg-panel: #{$bg-panel};
+  --sw-bg-panel-2: #{$bg-panel-2};
+  --sw-bg-panel-3: #{$bg-panel-3};
+
+  --sw-border-subtle: #{$border-subtle};
+  --sw-border-soft: #{$border-soft};
+  --sw-border-strong: #{$border-strong};
+
+  --sw-text-primary: #{$text-primary};
+  --sw-text-secondary: #{$text-secondary};
+  --sw-text-tertiary: #{$text-tertiary};
+  --sw-text-muted: #{$text-muted};
+
+  --sw-accent-cyan: #{$accent-cyan};
+  --sw-accent-amber: #{$accent-amber};
+  --sw-accent-red: #{$accent-red};
+  --sw-accent-green: #{$accent-green};
+  --sw-accent-violet: #{$accent-violet};
+
+  --sw-sev-critical: #{$sev-critical};
+  --sw-sev-high: #{$sev-high};
+  --sw-sev-medium: #{$sev-medium};
+  --sw-sev-low: #{$sev-low};
+  --sw-sev-info: #{$sev-info};
+
+  --sw-class-known: #{$class-known};
+  --sw-class-unknown: #{$class-unknown};
+  --sw-class-suspicious: #{$class-suspicious};
+  --sw-class-hostile: #{$class-hostile};
+  --sw-class-ignored: #{$class-ignored};
+
+  --sw-font-sans: #{$font-sans};
+  --sw-font-mono: #{$font-mono};
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: $bg-base;
+  color: $text-primary;
+  font-family: $font-sans;
+  font-size: $fs-base;
+  line-height: $lh-normal;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01" 1, "cv11" 1;
+}
+
+html,
+body {
+  min-height: 100%;
+  min-height: 100dvh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: rgba(74, 168, 200, 0.35);
+  color: $text-primary;
+}
+
+:focus-visible {
+  @include focus-ring;
+  border-radius: $radius-sm;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid $border-subtle;
+  margin: $space-4 0;
+}
+
+code, pre, kbd {
+  font-family: $font-mono;
+}
+
+/* MapLibre defaults overrides */
+.maplibregl-ctrl-attrib {
+  background: rgba(7, 9, 12, 0.6) !important;
+  color: $text-tertiary !important;
+  font-size: $fs-2xs !important;
+}
+.maplibregl-ctrl-attrib a { color: $text-secondary !important; }
+.maplibregl-ctrl button {
+  background-color: $bg-panel !important;
+  border-color: $border-soft !important;
+}
+.maplibregl-popup-content {
+  background: $bg-panel-2 !important;
+  color: $text-primary !important;
+  border: 1px solid $border-soft;
+  border-radius: $radius-md !important;
+  box-shadow: $shadow-2 !important;
+  padding: $space-3 !important;
+  font-size: $fs-sm;
+}
+.maplibregl-popup-tip { display: none !important; }

@@ -1,0 +1,24 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.aliasCell { display: flex; flex-direction: column; gap: 2px; }
+.aliasName { color: $text-primary; font-weight: $fw-medium; font-size: $fs-sm; }
+.muted { color: $text-tertiary; font-size: $fs-xs; }
+.mono  { @include mono; font-size: $fs-xs; color: $text-secondary; }
+
+.drawer {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.note {
+  margin: 0;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  line-height: $lh-snug;
+}

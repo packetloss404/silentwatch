@@ -1,0 +1,37 @@
+.list {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-2;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  align-items: baseline;
+  gap: $space-3;
+  padding: 6px 0;
+  border-bottom: 1px dashed $border-subtle;
+
+  &:last-child { border-bottom: none; }
+}
+
+.label {
+  margin: 0;
+  @include section-title;
+}
+
+.value {
+  margin: 0;
+  color: $text-primary;
+  font-size: $fs-sm;
+  word-break: break-word;
+}
+
+.valueMono {
+  margin: 0;
+  color: $text-primary;
+  @include mono;
+  font-size: $fs-xs;
+  word-break: break-all;
+}

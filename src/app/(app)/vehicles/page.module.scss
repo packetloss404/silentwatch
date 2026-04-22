@@ -1,0 +1,203 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: $space-3;
+  align-items: start;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tableCol {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  min-width: 0;
+}
+
+.sideCol {
+  position: sticky;
+  top: $topbar-height + $space-4;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.plateCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.plateValue {
+  @include mono;
+  font-size: $fs-md;
+  color: $text-primary;
+  letter-spacing: 0.04em;
+}
+
+.plateRegion {
+  font-size: $fs-2xs;
+  color: $text-tertiary;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.aliasCell { display: flex; flex-direction: column; gap: 2px; }
+.aliasName { color: $text-primary; font-size: $fs-sm; font-weight: $fw-medium; text-transform: capitalize; }
+.muted { color: $text-tertiary; font-size: $fs-xs; }
+.mono  { @include mono; font-size: $fs-xs; color: $text-secondary; }
+
+.note {
+  margin: 0;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  line-height: $lh-snug;
+}
+
+/* Privacy posture card */
+.privacyCard {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: $space-3;
+  padding: $space-4;
+  background: $bg-panel;
+  border: 1px dashed rgba(74, 168, 200, 0.35);
+  border-radius: $radius-md;
+  color: $text-secondary;
+  font-size: $fs-sm;
+  line-height: $lh-snug;
+
+  svg { color: $accent-cyan; margin-top: 2px; }
+  p { margin: 4px 0 0; color: $text-tertiary; font-size: $fs-xs; }
+}
+
+.privacyTitle {
+  color: $text-primary;
+  font-size: $fs-sm;
+  font-weight: $fw-medium;
+}
+
+/* Watchlist sidebar */
+.watchGroups {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.watchGroup {
+  border-bottom: 1px solid $border-subtle;
+  padding: $space-3 $space-4;
+
+  &:last-child { border-bottom: none; }
+}
+
+.watchGroupHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $space-2;
+}
+
+.watchGroupCount {
+  @include mono;
+  font-size: $fs-xs;
+  color: $text-tertiary;
+}
+
+.watchItems {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.watchItem {
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  gap: $space-2;
+  align-items: center;
+  padding: 6px 8px;
+  background: $bg-panel-2;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+}
+
+.watchLabel {
+  font-size: $fs-sm;
+  color: $text-primary;
+  font-weight: $fw-medium;
+}
+
+.watchMeta {
+  font-size: $fs-2xs;
+  color: $text-tertiary;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.watchTrash {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-xs;
+  color: $text-tertiary;
+
+  &:hover { background: $bg-panel-3; color: $accent-red; }
+}
+
+.watchEmpty {
+  text-align: center;
+  font-size: $fs-xs;
+  color: $text-tertiary;
+  padding: $space-2;
+}
+
+/* drawer */
+.drawerTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: $text-primary;
+}
+
+.drawerBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.drawerStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-2;
+}
+
+.dStat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: $space-3;
+  background: $bg-panel;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+}
+
+.dStatLabel { @include section-title; }
+.dStatVal {
+  @include mono;
+  color: $text-primary;
+  font-size: $fs-md;
+  text-transform: capitalize;
+}

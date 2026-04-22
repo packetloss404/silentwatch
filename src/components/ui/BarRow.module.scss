@@ -1,0 +1,38 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 24), 1fr);
+  align-items: flex-end;
+  gap: 2px;
+  width: 100%;
+}
+
+.bar {
+  border-radius: 2px;
+  align-self: end;
+  min-height: 1px;
+  transition: opacity $dur-fast $ease-out;
+
+  &:hover {
+    opacity: 1 !important;
+  }
+}
+
+.labels {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 24), 1fr);
+  gap: 2px;
+  font-size: $fs-2xs;
+  color: $text-tertiary;
+}
+
+.label {
+  text-align: center;
+  letter-spacing: 0.04em;
+}

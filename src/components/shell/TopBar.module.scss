@@ -1,0 +1,94 @@
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+  height: $topbar-height;
+  padding: 0 $space-5;
+  background: $bg-panel;
+  border-bottom: 1px solid $border-subtle;
+  position: sticky;
+  top: 0;
+  z-index: $z-topbar;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.kbHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 6px;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-xs;
+  font-family: $font-mono;
+  font-size: $fs-2xs;
+  color: $text-tertiary;
+  background: $bg-panel-2;
+}
+
+.stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $fs-xs;
+  color: $text-tertiary;
+  padding: 4px 10px;
+  border-left: 1px solid $border-subtle;
+
+  &:first-of-type {
+    border-left: none;
+  }
+}
+
+.statIcon {
+  color: $text-secondary;
+}
+
+.timestamp {
+  @include mono;
+  font-size: $fs-xs;
+  color: $text-tertiary;
+  padding-left: $space-3;
+  border-left: 1px solid $border-subtle;
+}
+
+.bell {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  color: $text-secondary;
+
+  &:hover {
+    background: $bg-panel-2;
+    color: $text-primary;
+  }
+}
+
+.bellBadge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: $accent-red;
+  color: #fff;
+  border-radius: $radius-pill;
+  font-size: 9px;
+  font-weight: $fw-bold;
+  padding: 1px 5px;
+  line-height: 1;
+  border: 2px solid $bg-panel;
+}

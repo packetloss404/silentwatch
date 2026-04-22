@@ -1,0 +1,69 @@
+@use "tokens" as *;
+@use "sass:color";
+
+@mixin panel($pad: $space-4) {
+  background: $bg-panel;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  box-shadow: $shadow-1, $shadow-inset;
+  padding: $pad;
+}
+
+@mixin panel-raised($pad: $space-4) {
+  background: $bg-panel-2;
+  border: 1px solid $border-soft;
+  border-radius: $radius-md;
+  box-shadow: $shadow-2, $shadow-inset;
+  padding: $pad;
+}
+
+@mixin section-title {
+  font-size: $fs-2xs;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $text-tertiary;
+  font-weight: $fw-semi;
+}
+
+@mixin scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: $border-strong transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $border-soft;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: $border-strong;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@mixin focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 1px $bg-base, 0 0 0 3px color.adjust($accent-cyan, $alpha: -0.5);
+}
+
+@mixin mono {
+  font-family: $font-mono;
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.014) 1px, transparent 1px);
+  background-size: 24px 24px;
+}

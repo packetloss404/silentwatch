@@ -1,0 +1,24 @@
+.list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: $radius-xs;
+  background: rgba(255, 255, 255, 0.04);
+  color: $text-tertiary;
+  font-size: $fs-2xs;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: $fw-medium;
+  border: 1px solid $border-subtle;
+}
+
+.empty {
+  color: $text-muted;
+  font-size: $fs-xs;
+}

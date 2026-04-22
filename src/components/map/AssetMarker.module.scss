@@ -1,0 +1,117 @@
+.marker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg-panel-2;
+  border: 1px solid $border-strong;
+  border-radius: $radius-sm;
+  color: $text-primary;
+  box-shadow: $shadow-2;
+  transition: transform $dur-fast $ease-out, border-color $dur-fast $ease-out, background $dur-fast $ease-out;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: $bg-panel-3;
+    border-color: $accent-cyan;
+    .label { opacity: 1; }
+  }
+}
+
+.selected {
+  border-color: $accent-cyan !important;
+  box-shadow: 0 0 0 2px rgba(74,168,200,0.45), $shadow-2;
+  .label { opacity: 1; color: $accent-cyan; }
+}
+
+.dim {
+  opacity: 0.45;
+  border-style: dashed;
+}
+
+.warn {
+  border-color: $accent-amber;
+  color: $accent-amber;
+}
+
+.label {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1px 6px;
+  background: $bg-panel-2;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-xs;
+  font-size: $fs-2xs;
+  color: $text-secondary;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity $dur-fast $ease-out;
+}
+
+.heading {
+  position: absolute;
+  inset: -8px;
+  pointer-events: none;
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 7px solid $accent-cyan;
+    opacity: 0.85;
+  }
+}
+
+.type-camera        { color: $accent-cyan; }
+.type-lpr-camera    { color: $accent-amber; }
+.type-ir-camera     { color: $accent-red; }
+.type-occupancy-counter { color: $accent-green; }
+.type-sensor        { color: $accent-green; }
+.type-access-point  { color: $accent-violet; }
+.type-gateway       { color: $text-secondary; }
+.type-switch        { color: $text-secondary; }
+.type-door-controller { color: $accent-amber; }
+.type-vehicle       { color: $accent-amber; }
+.type-building      { color: $text-tertiary; background: $bg-panel; border-style: dashed; }
+.type-entrance      { color: $accent-amber; }
+.type-beacon        { color: $accent-violet; }
+
+.ping {
+  position: relative;
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+}
+
+.pingPulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.25;
+  animation: pulse 1.6s ease-out infinite;
+}
+
+.pingDot {
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.7); opacity: 0.45; }
+  100% { transform: scale(2.2); opacity: 0; }
+}

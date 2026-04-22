@@ -1,0 +1,71 @@
+.wrap {
+  width: 100%;
+  overflow: auto;
+  @include scrollbar;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: $fs-sm;
+  color: $text-secondary;
+
+  thead th {
+    position: sticky;
+    top: 0;
+    background: $bg-panel;
+    z-index: 1;
+    text-align: left;
+    @include section-title;
+    padding: $space-2 $space-3;
+    border-bottom: 1px solid $border-subtle;
+    font-weight: $fw-semi;
+  }
+
+  tbody td {
+    padding: $space-3;
+    border-bottom: 1px solid $border-subtle;
+    color: $text-primary;
+    vertical-align: middle;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.dense tbody td {
+  padding: 6px $space-3;
+  font-size: $fs-sm;
+}
+
+.clickable {
+  cursor: pointer;
+  &:hover td {
+    background: $bg-panel-2;
+  }
+}
+
+.selected td {
+  background: rgba(74, 168, 200, 0.08) !important;
+  box-shadow: inset 2px 0 0 $accent-cyan;
+}
+
+.emptyRow td {
+  text-align: center;
+  color: $text-tertiary;
+  padding: $space-7 !important;
+  font-size: $fs-sm;
+}
+
+.mono {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  letter-spacing: 0.01em;
+  color: $text-secondary;
+}
+
+.align-left   { text-align: left; }
+.align-right  { text-align: right; }
+.align-center { text-align: center; }

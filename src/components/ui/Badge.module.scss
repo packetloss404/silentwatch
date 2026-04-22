@@ -1,0 +1,57 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: $radius-pill;
+  font-size: $fs-xs;
+  font-weight: $fw-medium;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  background: rgba(255, 255, 255, 0.04);
+  color: $text-secondary;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.md {
+  font-size: $fs-sm;
+  padding: 4px 10px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.outline {
+  background: transparent;
+  border-color: currentColor;
+}
+
+@mixin tone($color, $bg) {
+  color: $color;
+  background: $bg;
+  border-color: rgba(255,255,255,0);
+}
+
+.neutral { @include tone($text-secondary, rgba(255,255,255,0.04)); }
+.cyan    { @include tone($accent-cyan, rgba(74,168,200,0.10)); }
+.amber   { @include tone($accent-amber, rgba(200,159,74,0.10)); }
+.red     { @include tone($accent-red, rgba(200,88,74,0.10)); }
+.green   { @include tone($accent-green, rgba(95,163,122,0.10)); }
+.violet  { @include tone($accent-violet, rgba(138,122,200,0.10)); }
+
+.critical { @include tone($sev-critical, rgba(200,88,74,0.10)); }
+.high     { @include tone($sev-high, rgba(217,124,74,0.10)); }
+.medium   { @include tone($sev-medium, rgba(200,159,74,0.10)); }
+.low      { @include tone($sev-low, rgba(74,168,200,0.10)); }
+.info     { @include tone($sev-info, rgba(255,255,255,0.04)); }
+
+.known      { @include tone($class-known, rgba(95,163,122,0.10)); }
+.unknown    { @include tone($class-unknown, rgba(255,255,255,0.04)); }
+.suspicious { @include tone($class-suspicious, rgba(200,159,74,0.10)); }
+.hostile    { @include tone($class-hostile, rgba(200,88,74,0.10)); }
+.ignored    { @include tone($class-ignored, rgba(255,255,255,0.03)); }

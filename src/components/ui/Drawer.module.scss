@@ -1,0 +1,98 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 4, 7, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: $z-drawer;
+  animation: fade $dur-base $ease-out;
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: $bg-panel-2;
+  border-left: 1px solid $border-soft;
+  box-shadow: $shadow-3;
+  z-index: $z-drawer + 1;
+  display: flex;
+  flex-direction: column;
+  animation: slide $dur-base $ease-out;
+  outline: none;
+  max-width: 90vw;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: $space-4 $space-4 $space-3;
+  border-bottom: 1px solid $border-subtle;
+  gap: $space-3;
+}
+
+.titles {
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: $fs-md;
+  font-weight: $fw-semi;
+  color: $text-primary;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font-size: $fs-xs;
+  color: $text-tertiary;
+}
+
+.close {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  color: $text-tertiary;
+
+  &:hover {
+    background: $bg-panel-3;
+    color: $text-primary;
+  }
+}
+
+.body {
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: $space-4;
+  @include scrollbar;
+}
+
+.footer {
+  border-top: 1px solid $border-subtle;
+  padding: $space-3 $space-4;
+  display: flex;
+  justify-content: flex-end;
+  gap: $space-2;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide {
+  from { transform: translateX(8px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}

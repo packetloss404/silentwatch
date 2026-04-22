@@ -1,0 +1,318 @@
+.workspace {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: $bg-canvas;
+  border-top: 1px solid $border-subtle;
+}
+
+.mapWrap {
+  position: relative;
+  overflow: hidden;
+  border-right: 1px solid $border-subtle;
+}
+
+.scanGrid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  @include grid-bg;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+/* Layer panel */
+.layerPanel {
+  position: absolute;
+  top: $space-3;
+  left: $space-3;
+  width: 200px;
+  background: $bg-overlay;
+  backdrop-filter: blur(6px);
+  border: 1px solid $border-soft;
+  border-radius: $radius-md;
+  padding: $space-2;
+  box-shadow: $shadow-2;
+  z-index: 4;
+}
+
+.layerHeader {
+  @include section-title;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+}
+
+.layerList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.layerToggle {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: $radius-xs;
+  font-size: $fs-xs;
+  color: $text-secondary;
+
+  &:hover {
+    background: $bg-panel-3;
+    color: $text-primary;
+  }
+}
+
+/* Top-right controls */
+.controls {
+  position: absolute;
+  top: $space-3;
+  right: $space-3;
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  z-index: 4;
+}
+
+/* Zone strip */
+.zoneStrip {
+  position: absolute;
+  top: $space-3;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: $space-1;
+  padding: 4px;
+  background: $bg-overlay;
+  border: 1px solid $border-soft;
+  border-radius: $radius-pill;
+  box-shadow: $shadow-1;
+  z-index: 3;
+  backdrop-filter: blur(6px);
+}
+
+.zoneChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: $fs-2xs;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $text-secondary;
+  border-radius: $radius-pill;
+  font-weight: $fw-medium;
+
+  &:hover { background: $bg-panel-3; color: $text-primary; }
+}
+
+.zoneDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.kind-perimeter   { color: $accent-cyan; }
+.kind-restricted  { color: $accent-red; }
+.kind-interior    { color: $accent-green; }
+.kind-parking     { color: $accent-violet; }
+.kind-utility     { color: $text-tertiary; }
+.kind-public      { color: $text-secondary; }
+
+/* Timeline */
+.timeline {
+  position: absolute;
+  bottom: $space-3;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(820px, 90%);
+  background: $bg-overlay;
+  border: 1px solid $border-soft;
+  border-radius: $radius-md;
+  padding: $space-3 $space-4;
+  box-shadow: $shadow-2;
+  backdrop-filter: blur(6px);
+  z-index: 4;
+}
+
+.timelineLabel {
+  @include section-title;
+  margin-bottom: 6px;
+}
+
+.timelineRow {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.timeStamp {
+  @include mono;
+  font-size: $fs-2xs;
+  color: $text-tertiary;
+  letter-spacing: 0.04em;
+  min-width: 40px;
+}
+
+.slider {
+  flex: 1 1 auto;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: $border-soft;
+  border-radius: $radius-pill;
+  outline: none;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: $accent-cyan;
+    border: 2px solid $bg-panel;
+    cursor: pointer;
+    box-shadow: 0 0 0 1px $border-strong;
+  }
+  &::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: $accent-cyan;
+    border: 2px solid $bg-panel;
+    cursor: pointer;
+  }
+}
+
+/* Inspector */
+.inspector {
+  background: $bg-panel;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  @include scrollbar;
+
+  > section {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+  }
+}
+
+.inspectorBody {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.inspectorEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: $space-6 $space-4;
+  color: $text-tertiary;
+
+  svg { color: $text-muted; margin-bottom: $space-3; }
+  p { font-size: $fs-sm; max-width: 280px; }
+}
+
+.legendList {
+  list-style: none;
+  margin: $space-4 0 0;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  font-size: $fs-xs;
+  color: $text-secondary;
+
+  li { display: flex; align-items: center; gap: 6px; }
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.inspectorSection {
+  @include section-title;
+  margin-bottom: $space-2;
+}
+
+.inspectorNote {
+  background: $bg-panel-2;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: $space-3;
+  font-size: $fs-sm;
+  color: $text-secondary;
+
+  p { margin: 0; }
+}
+
+.alertMini {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  li {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: $space-3;
+    align-items: center;
+    padding: $space-2 $space-3;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-sm;
+    background: $bg-panel-2;
+  }
+}
+
+.alertMiniTitle {
+  font-size: $fs-sm;
+  color: $text-primary;
+  @include truncate;
+}
+
+.alertMiniMeta {
+  font-size: $fs-xs;
+  color: $text-tertiary;
+}
+
+.signalMini {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-2 $space-3;
+    background: $bg-panel-2;
+    border: 1px solid $border-subtle;
+    border-radius: $radius-sm;
+  }
+}
+
+.signalMiniAlias { color: $text-primary; font-size: $fs-sm; @include truncate; }
+.signalMiniMeta { color: $text-tertiary; font-size: $fs-xs; @include mono; }
+.signalMiniRight { display: flex; align-items: center; gap: $space-2; color: $accent-cyan; }

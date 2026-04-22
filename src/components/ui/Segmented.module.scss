@@ -1,0 +1,28 @@
+.group {
+  display: inline-flex;
+  background: $bg-panel;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  padding: 2px;
+  gap: 2px;
+}
+
+.sm .btn { height: 24px; padding: 0 10px; font-size: $fs-xs; }
+.md .btn { height: 30px; padding: 0 14px; font-size: $fs-sm; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  color: $text-tertiary;
+  font-weight: $fw-medium;
+  transition: background $dur-fast $ease-out, color $dur-fast $ease-out;
+
+  &:hover { color: $text-secondary; }
+}
+
+.active {
+  background: $bg-panel-3;
+  color: $text-primary;
+  box-shadow: $shadow-1;
+}

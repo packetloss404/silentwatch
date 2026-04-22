@@ -1,0 +1,91 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: $radius-sm;
+  font-weight: $fw-medium;
+  font-size: $fs-sm;
+  letter-spacing: 0.01em;
+  padding: 6px 10px;
+  height: 28px;
+  border: 1px solid transparent;
+  transition: background $dur-fast $ease-out, border-color $dur-fast $ease-out, color $dur-fast $ease-out;
+  white-space: nowrap;
+  user-select: none;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.md {
+  height: 34px;
+  padding: 8px 14px;
+  font-size: $fs-md;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.primary {
+  background: rgba(74, 168, 200, 0.14);
+  color: $accent-cyan;
+  border-color: rgba(74, 168, 200, 0.35);
+
+  &:hover:not(:disabled) {
+    background: rgba(74, 168, 200, 0.22);
+    border-color: rgba(74, 168, 200, 0.55);
+  }
+}
+
+.subtle {
+  background: $bg-panel-2;
+  color: $text-secondary;
+  border-color: $border-soft;
+
+  &:hover:not(:disabled) {
+    background: $bg-panel-3;
+    color: $text-primary;
+  }
+}
+
+.ghost {
+  background: transparent;
+  color: $text-tertiary;
+
+  &:hover:not(:disabled) {
+    background: $bg-panel-2;
+    color: $text-primary;
+  }
+}
+
+.outline {
+  background: transparent;
+  color: $text-secondary;
+  border-color: $border-soft;
+
+  &:hover:not(:disabled) {
+    background: $bg-panel-2;
+    color: $text-primary;
+    border-color: $border-strong;
+  }
+}
+
+.danger {
+  background: rgba(200, 88, 74, 0.12);
+  color: $accent-red;
+  border-color: rgba(200, 88, 74, 0.35);
+
+  &:hover:not(:disabled) {
+    background: rgba(200, 88, 74, 0.18);
+  }
+}

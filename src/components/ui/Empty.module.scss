@@ -1,0 +1,39 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: $space-9 $space-5;
+  color: $text-tertiary;
+  gap: $space-2;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-md;
+  background: $bg-panel;
+  border: 1px solid $border-subtle;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-tertiary;
+  margin-bottom: $space-2;
+}
+
+.title {
+  color: $text-secondary;
+  font-size: $fs-md;
+  font-weight: $fw-medium;
+}
+
+.desc {
+  font-size: $fs-sm;
+  max-width: 380px;
+  color: $text-tertiary;
+}
+
+.action {
+  margin-top: $space-3;
+}

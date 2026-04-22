@@ -1,0 +1,123 @@
+// SilentWatch — design tokens
+// Restrained, operator-grade palette. No neon. No gradients-for-decoration.
+
+// ─── Color: surfaces ────────────────────────────────────────────────
+$bg-base:        #07090c;   // page background, near-black graphite
+$bg-canvas:      #0b0e13;   // map / large canvas areas
+$bg-panel:       #11151c;   // primary panels
+$bg-panel-2:     #161b24;   // raised panels / inspector
+$bg-panel-3:     #1c2230;   // hovered surfaces / active rows
+$bg-overlay:     rgba(7, 9, 12, 0.72);
+
+// ─── Color: borders & lines ─────────────────────────────────────────
+$border-subtle:  #1f2533;
+$border-soft:    #262d3d;
+$border-strong:  #323a4d;
+$border-focus:   #4aa8c8;
+
+// ─── Color: text ────────────────────────────────────────────────────
+$text-primary:   #e6ecf3;
+$text-secondary: #9aa6b8;
+$text-tertiary:  #67738a;
+$text-muted:     #4a5468;
+$text-on-accent: #07090c;
+
+// ─── Color: accents (used sparingly, only where meaningful) ─────────
+$accent-cyan:    #4aa8c8;   // primary accent — info, selection
+$accent-cyan-dim:#2b6478;
+$accent-amber:   #c89f4a;   // caution / pending / advisory
+$accent-amber-dim:#7a6029;
+$accent-red:     #c8584a;   // critical / alarm
+$accent-red-dim: #7a312a;
+$accent-green:   #5fa37a;   // healthy / acknowledged
+$accent-green-dim:#2f5a44;
+$accent-violet:  #8a7ac8;   // signals / RF
+$accent-violet-dim:#4a4078;
+
+// ─── Severity scale (for incidents, alerts) ─────────────────────────
+$sev-critical:   $accent-red;
+$sev-high:       #d97c4a;
+$sev-medium:     $accent-amber;
+$sev-low:        $accent-cyan;
+$sev-info:       $text-tertiary;
+
+// ─── Classification scale (for signals) ─────────────────────────────
+$class-known:        $accent-green;
+$class-unknown:      $text-tertiary;
+$class-suspicious:   $accent-amber;
+$class-hostile:      $accent-red;
+$class-ignored:      $text-muted;
+
+// ─── Typography ─────────────────────────────────────────────────────
+$font-sans: "Inter", "SF Pro Text", "Segoe UI", "Helvetica Neue", system-ui, -apple-system, sans-serif;
+$font-mono: "JetBrains Mono", "SF Mono", "Cascadia Mono", "Consolas", "Menlo", monospace;
+
+$fs-2xs:   10px;
+$fs-xs:    11px;
+$fs-sm:    12px;
+$fs-base:  13px;
+$fs-md:    14px;
+$fs-lg:    16px;
+$fs-xl:    19px;
+$fs-2xl:   24px;
+$fs-3xl:   30px;
+
+$fw-regular: 400;
+$fw-medium:  500;
+$fw-semi:    600;
+$fw-bold:    700;
+
+$lh-tight:   1.2;
+$lh-snug:    1.35;
+$lh-normal:  1.5;
+
+// ─── Spacing (4px base) ─────────────────────────────────────────────
+$space-0:  0;
+$space-1:  4px;
+$space-2:  8px;
+$space-3:  12px;
+$space-4:  16px;
+$space-5:  20px;
+$space-6:  24px;
+$space-7:  32px;
+$space-8:  40px;
+$space-9:  48px;
+$space-10: 64px;
+
+// ─── Radius ─────────────────────────────────────────────────────────
+$radius-xs: 4px;
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 14px;
+$radius-xl: 16px;
+$radius-pill: 999px;
+
+// ─── Shadows ────────────────────────────────────────────────────────
+$shadow-1: 0 1px 0 rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.5);
+$shadow-2: 0 2px 4px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.45);
+$shadow-3: 0 8px 24px rgba(0, 0, 0, 0.55), 0 2px 4px rgba(0, 0, 0, 0.5);
+$shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+
+// ─── Z-index scale ──────────────────────────────────────────────────
+$z-sidebar: 10;
+$z-topbar:  20;
+$z-overlay: 100;
+$z-drawer:  200;
+$z-modal:   300;
+$z-toast:   400;
+
+// ─── Layout ─────────────────────────────────────────────────────────
+$sidebar-width: 232px;
+$sidebar-width-collapsed: 56px;
+$topbar-height: 48px;
+
+// ─── Motion ─────────────────────────────────────────────────────────
+$ease-out:  cubic-bezier(0.2, 0.8, 0.2, 1);
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$dur-fast:  120ms;
+$dur-base:  180ms;
+$dur-slow:  280ms;
+
+// CSS custom properties live in `globals.scss`. This file holds Sass values
+// only — it is auto-injected into every `*.module.scss` by next.config.js, so
+// it must not emit any CSS rules (CSS Modules requires pure selectors).

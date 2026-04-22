@@ -1,0 +1,126 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.aliasCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.aliasName {
+  color: $text-primary;
+  font-weight: $fw-medium;
+  font-size: $fs-sm;
+}
+
+.muted { color: $text-tertiary; font-size: $fs-xs; }
+.mono  { @include mono; font-size: $fs-xs; color: $text-secondary; }
+
+.sortBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  &:hover { color: $text-primary; }
+}
+
+.anomalyCell {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.anomalyBar {
+  flex: 1 1 auto;
+  background: $bg-panel;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-pill;
+  height: 6px;
+  overflow: hidden;
+  min-width: 60px;
+}
+
+.anomalyBarFill {
+  height: 100%;
+  border-radius: inherit;
+}
+
+/* drawer */
+.drawerBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.drawerStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-2;
+}
+
+.dStat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: $space-3;
+  background: $bg-panel;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+}
+
+.dStatLabel { @include section-title; }
+.dStatVal {
+  @include mono;
+  color: $text-primary;
+  font-size: $fs-lg;
+}
+
+.bigSpark {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: $accent-cyan;
+}
+
+.note {
+  margin: 0;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  line-height: $lh-snug;
+}
+
+.linkedAlerts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: $space-3;
+    align-items: center;
+    padding: $space-3 $space-4;
+    border-bottom: 1px solid $border-subtle;
+
+    &:last-child { border-bottom: none; }
+  }
+}
+
+.alertTitle { color: $text-primary; font-size: $fs-sm; }
+.alertMeta  { color: $text-tertiary; font-size: $fs-xs; margin-top: 2px; }
+
+.emptyRow {
+  text-align: center;
+  color: $text-tertiary;
+  padding: $space-5 !important;
+  display: block !important;
+  grid-template-columns: 1fr !important;
+}

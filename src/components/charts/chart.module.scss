@@ -1,0 +1,70 @@
+.chart {
+  width: 100%;
+}
+
+.donutWrap {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  text-align: center;
+}
+
+.centerVal {
+  font-size: $fs-2xl;
+  font-weight: $fw-semi;
+  @include mono;
+  color: $text-primary;
+  letter-spacing: -0.01em;
+}
+
+.centerSub {
+  font-size: $fs-2xs;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $text-tertiary;
+  margin-top: 2px;
+}
+
+.legend {
+  list-style: none;
+  margin: 0;
+  padding: $space-2 $space-2 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px $space-3;
+  font-size: $fs-xs;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: $text-secondary;
+  }
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  flex: 1 1 auto;
+  @include truncate;
+}
+
+.legendVal {
+  @include mono;
+  color: $text-tertiary;
+}

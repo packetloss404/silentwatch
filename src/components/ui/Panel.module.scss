@@ -1,0 +1,59 @@
+.panel {
+  background: $bg-panel;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  box-shadow: $shadow-1, $shadow-inset;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.raised {
+  background: $bg-panel-2;
+  border-color: $border-soft;
+  box-shadow: $shadow-2, $shadow-inset;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.titles {
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: $fs-sm;
+  font-weight: $fw-semi;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $text-secondary;
+  @include truncate;
+}
+
+.subtitle {
+  margin: 2px 0 0;
+  font-size: $fs-xs;
+  color: $text-tertiary;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.body {
+  padding: $space-4;
+  min-width: 0;
+}
+
+.flush {
+  padding: 0;
+}

@@ -1,0 +1,69 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.colLabels {
+  display: grid;
+  gap: 2px;
+}
+
+.colLabel {
+  text-align: center;
+  font-size: $fs-2xs;
+  color: $text-tertiary;
+  letter-spacing: 0.04em;
+}
+
+.bandLabel {
+  color: $accent-amber;
+}
+
+.grid {
+  display: grid;
+  gap: 2px;
+}
+
+.rowLabel {
+  font-size: $fs-2xs;
+  color: $text-tertiary;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  padding-right: $space-2;
+}
+
+.cell {
+  height: 18px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  transition: transform $dur-fast $ease-out, border-color $dur-fast $ease-out;
+
+  &:hover {
+    transform: scale(1.08);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+}
+
+.bandCell {
+  box-shadow: inset 0 0 0 1px rgba(200, 159, 74, 0.32);
+}
+
+.bandLegend {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $fs-xs;
+  color: $text-tertiary;
+}
+
+.bandSwatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: rgba(200, 159, 74, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(200, 159, 74, 0.45);
+}

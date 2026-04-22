@@ -1,0 +1,72 @@
+services:
+  web:
+    build: .
+    image: silentwatch/web:dev
+    container_name: silentwatch-web
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_APP_ENV: docker
+      NEXT_PUBLIC_MAP_STYLE_URL: ${NEXT_PUBLIC_MAP_STYLE_URL:-https://demotiles.maplibre.org/style.json}
+    healthcheck:
+      test: ['CMD', 'node', '-e', "require('http').get('http://127.0.0.1:3000/api/health',(r)=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+    # depends_on:
+    #   - db
+    #   - redis
+
+  # The services below are placeholders for the future real backend.
+  # They are commented out so `docker compose up` starts only the web app
+  # in mock mode by default. Uncomment when wiring a real FastAPI / NestJS
+  # service against PostgreSQL + PostGIS + Redis + MinIO.
+
+  # api:
+  #   build: ./services/api
+  #   container_name: silentwatch-api
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     POSTGRES_HOST: db
+  #     POSTGRES_USER: silentwatch
+  #     POSTGRES_PASSWORD: changeme
+  #     POSTGRES_DB: silentwatch
+  #     REDIS_URL: redis://redis:6379/0
+  #   depends_on:
+  #     - db
+  #     - redis
+
+  # db:
+  #   image: postgis/postgis:16-3.4
+  #   container_name: silentwatch-db
+  #   environment:
+  #     POSTGRES_USER: silentwatch
+  #     POSTGRES_PASSWORD: changeme
+  #     POSTGRES_DB: silentwatch
+  #   volumes:
+  #     - ./data/postgres:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: silentwatch-redis
+  #   ports:
+  #     - "6379:6379"
+
+  # minio:
+  #   image: minio/minio:latest
+  #   container_name: silentwatch-minio
+  #   command: server /data --console-address ":9001"
+  #   environment:
+  #     MINIO_ROOT_USER: silentwatch
+  #     MINIO_ROOT_PASSWORD: changeme
+  #   ports:
+  #     - "9000:9000"
+  #     - "9001:9001"
+  #   volumes:
+  #     - ./data/minio:/data

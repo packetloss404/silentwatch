@@ -1,0 +1,41 @@
+.wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.icon {
+  position: absolute;
+  left: 8px;
+  color: $text-tertiary;
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  background: $bg-panel;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-sm;
+  height: 28px;
+  padding: 0 10px 0 28px;
+  color: $text-primary;
+  font-size: $fs-sm;
+  outline: none;
+  transition: border-color $dur-fast $ease-out, background $dur-fast $ease-out;
+
+  &::placeholder {
+    color: $text-tertiary;
+  }
+
+  &:hover {
+    border-color: $border-soft;
+  }
+
+  &:focus-visible {
+    border-color: rgba(74, 168, 200, 0.55);
+    background: $bg-panel-2;
+    box-shadow: 0 0 0 3px rgba(74, 168, 200, 0.18);
+  }
+
+  &::-webkit-search-cancel-button { display: none; }
+}

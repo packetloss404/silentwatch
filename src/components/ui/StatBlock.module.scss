@@ -1,0 +1,55 @@
+.stat {
+  background: $bg-panel;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background: $border-soft;
+  }
+}
+
+.label {
+  @include section-title;
+}
+
+.value {
+  font-size: $fs-2xl;
+  font-weight: $fw-semi;
+  color: $text-primary;
+  line-height: 1.1;
+  margin-top: 2px;
+  @include mono;
+  letter-spacing: -0.01em;
+}
+
+.foot {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  margin-top: $space-1;
+  font-size: $fs-xs;
+}
+
+.delta {
+  font-weight: $fw-medium;
+}
+
+.hint {
+  color: $text-tertiary;
+}
+
+.cyan::before  { background: $accent-cyan; }
+.amber::before { background: $accent-amber; }
+.red::before   { background: $accent-red; }
+.green::before { background: $accent-green; }
