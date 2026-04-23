@@ -42,7 +42,7 @@ export default async function ReportsPage() {
       <PageHeader
         eyebrow="Operations"
         title="Reports"
-        description="Generate exportable summaries for stakeholders, audit reviewers, and on-call rotations."
+        description="Generate exportable summaries for stakeholders, compliance reviewers, and security leadership."
         actions={<Button variant="primary" iconLeft={<FileText size={13} />}>New report</Button>}
       />
 
@@ -57,7 +57,9 @@ export default async function ReportsPage() {
             <button className={styles.tile}>
               <Badge tone="violet" size="sm">TECH</Badge>
               <div className={styles.tileTitle}>Technical detail</div>
-              <p className={styles.tileBody}>Signal, sensor, and network activity with charts and tables.</p>
+              <p className={styles.tileBody}>
+                Camera, RF, sensor, and optional on-site host correlation with charts and tables.
+              </p>
             </button>
             <button className={styles.tile}>
               <Badge tone="amber" size="sm">DRIFT</Badge>

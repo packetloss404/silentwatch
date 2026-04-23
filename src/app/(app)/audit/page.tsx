@@ -15,7 +15,7 @@ export const dynamic = 'force-static';
 
 const KIND_LABEL: Record<string, string> = {
   'rogue-access-point': 'Rogue access point',
-  'unknown-network-device': 'Unknown network device',
+  'unknown-network-device': 'Unapproved on-site host',
   'unusual-bluetooth': 'Unusual Bluetooth',
   'exposed-service': 'Exposed service',
   'asset-missing': 'Asset missing',
@@ -44,7 +44,7 @@ export default async function AuditPage() {
       <PageHeader
         eyebrow="Operations"
         title="Privacy audit"
-        description="Compare the current environment to an approved baseline. Surface drift, identify rogue or misconfigured devices, and ship a remediation checklist."
+        description="Compare the current site to an approved baseline: physical install, RF signature, and optional LAN inventory. Surface drift and ship a remediation checklist."
         meta={
           <>
             <Badge tone="cyan" dot size="sm">Active baseline · {active.name}</Badge>
@@ -68,12 +68,17 @@ export default async function AuditPage() {
           delta={<Badge tone="red" size="sm">{sevCounts.high + sevCounts.critical} elevated</Badge>}
           hint={`${resolved.length} resolved this cycle`}
         />
-        <StatBlock label="Network devices observed" value={network.length} tone="cyan" hint="Across owned subnets" />
+        <StatBlock
+          label="On-site hosts (optional LAN)"
+          value={network.length}
+          tone="cyan"
+          hint="Inventoried segments you administer"
+        />
         <StatBlock
           label="Baseline assets"
           value={active.assetCount}
           tone="green"
-          hint={`Signals ${active.signalCount} · Net ${active.networkCount}`}
+          hint={`In snapshot: ${active.signalCount} RF · ${active.networkCount} LAN hosts`}
         />
         <StatBlock
           label="Baseline age"

@@ -14,9 +14,9 @@ export default async function SignalsPage() {
   return (
     <PageContainer>
       <PageHeader
-        eyebrow="Awareness"
-        title="Signals"
-        description="Wi-Fi, Bluetooth, and BLE devices observed in the operating environment. Mark devices as known, suspicious, or ignore — and follow drift over time."
+        eyebrow="Ambient radio"
+        title="RF & Wi-Fi"
+        description="Wi-Fi, Bluetooth, and BLE near or at the property (what passes the line in radio terms). Complements camera and LPR feeds; it is not a server or LAN operations console. Classify as known, suspicious, or track drift over time."
         meta={
           <>
             <Badge tone="green" dot size="sm">

@@ -18,12 +18,12 @@ import { clsx } from 'clsx';
 import styles from './Sidebar.module.scss';
 
 const NAV: { href: string; label: string; icon: typeof Activity; group?: string; chip?: string }[] = [
-  { href: '/dashboard', label: 'Command', icon: LayoutDashboard, group: 'Overview' },
-  { href: '/map', label: 'Map workspace', icon: Map, group: 'Overview' },
-  { href: '/signals', label: 'Signals', icon: Radio, group: 'Awareness' },
-  { href: '/vehicles', label: 'Vehicles · LPR', icon: CarFront, group: 'Awareness' },
-  { href: '/patterns', label: 'Patterns', icon: ScanSearch, group: 'Awareness' },
-  { href: '/assets', label: 'Assets', icon: ShieldCheck, group: 'Awareness' },
+  { href: '/dashboard', label: 'Site overview', icon: LayoutDashboard, group: 'Property' },
+  { href: '/map', label: 'Map & zones', icon: Map, group: 'Property' },
+  { href: '/signals', label: 'RF & Wi-Fi', icon: Radio, group: 'Sensors & edge' },
+  { href: '/vehicles', label: 'Vehicles · LPR', icon: CarFront, group: 'Sensors & edge' },
+  { href: '/patterns', label: 'Patterns', icon: ScanSearch, group: 'Sensors & edge' },
+  { href: '/assets', label: 'Assets', icon: ShieldCheck, group: 'Sensors & edge' },
   { href: '/incidents', label: 'Incidents', icon: AlertTriangle, group: 'Operations', chip: '5' },
   { href: '/audit', label: 'Privacy audit', icon: ClipboardList, group: 'Operations' },
   { href: '/reports', label: 'Reports', icon: FileText, group: 'Operations' },
@@ -84,7 +84,7 @@ export function Sidebar() {
       <footer className={styles.footer}>
         <div className={styles.footerRow}>
           <span className={styles.statusDot} aria-hidden />
-          <span>All systems nominal</span>
+          <span>Edge channels nominal</span>
         </div>
         <div className={styles.footerSub}>v0.1 · mock data</div>
       </footer>

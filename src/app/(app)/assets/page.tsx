@@ -14,9 +14,9 @@ export default async function AssetsPage() {
   return (
     <PageContainer>
       <PageHeader
-        eyebrow="Awareness"
+        eyebrow="Sensors & edge"
         title="Assets"
-        description="Inventory of cameras, sensors, gateways, doors and other physical infrastructure under operator stewardship."
+        description="Cameras, LPR posts, occupancy counters, gateways, doors, and other fixed gear on the property map — not a generic IT asset list."
         meta={
           <>
             <Badge tone="green" dot size="sm">{assets.filter((a) => a.status === 'online').length} online</Badge>

@@ -82,7 +82,7 @@ export default async function DashboardPage() {
     { name: 'North Perimeter', value: 38 },
     { name: 'South Perimeter', value: 22 },
     { name: 'Main Yard', value: 71 },
-    { name: 'Operations Building', value: 89 },
+    { name: 'Main Building', value: 89 },
     { name: 'Visitor Parking', value: 54 },
     { name: 'Utility Yard', value: 17 },
   ];
@@ -98,9 +98,9 @@ export default async function DashboardPage() {
   return (
     <PageContainer>
       <PageHeader
-        eyebrow="Command Dashboard"
-        title={`${site.name} — operating posture`}
-        description="Live overview of detections, environment integrity, and operator workload across the site."
+        eyebrow="Site security"
+        title={`${site.name} — perimeter & awareness`}
+        description="Live view of what your cameras, edge sensors, and (optional) RF module are reporting: motion, vehicles, and patterns—without treating this as a network NOC."
         meta={
           <>
             <Badge tone="green" dot size="sm">All ingest pipelines online</Badge>

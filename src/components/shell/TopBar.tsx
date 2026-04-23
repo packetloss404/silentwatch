@@ -33,9 +33,9 @@ export function TopBar() {
       <div className={styles.left}>
         <SearchInput
           ref={searchRef}
-          placeholder="Search assets, signals, incidents…"
+          placeholder="Search zones, devices, vehicles, incidents…"
           width={320}
-          aria-label="Search assets, signals, and incidents"
+          aria-label="Search zones, edge devices, vehicles, and incidents"
         />
         <div className={styles.kbHint} title="Focus search (Ctrl or ⌘ + K)">
           <Command size={11} /> <span>K</span>

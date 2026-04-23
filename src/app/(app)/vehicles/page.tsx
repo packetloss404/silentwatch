@@ -18,9 +18,9 @@ export default async function VehiclesPage() {
   return (
     <PageContainer>
       <PageHeader
-        eyebrow="Awareness · LPR"
+        eyebrow="Property · LPR"
         title="Vehicles"
-        description="Plate observations from operator-owned LPR cameras. Plates are masked in the UI; SilentWatch never resolves plates to owners and never builds identity dossiers."
+        description="Plates, vehicle class, and make-style fields from LPR on your property. Plates are masked; SilentWatch does not resolve plates to owners or build identity dossiers."
         meta={
           <>
             <Badge tone="green" dot size="sm">{vehicles.filter((v) => v.classification === 'expected').length} expected</Badge>

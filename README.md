@@ -1,32 +1,40 @@
 # SilentWatch
 
-> Defensive privacy & situational-awareness platform for lawful, consent-based
-> environmental monitoring of property and infrastructure you own or administer.
+> Defensive privacy & situational-awareness for **property you own or lawfully
+> protect** — perimeter, buildings, parking, and approaches — not corporate
+> network or server operations.
 
-SilentWatch is an operator-grade web application for security-conscious teams
-who need to understand the devices, signals, and assets in *their own*
-environment. It exists to help defenders inventory what's there, detect drift
-from a known baseline, investigate anomalies, and document their work — not
-to collect data on individuals.
+SilentWatch is an operator-grade web app for **physical site security** and
+**awareness around the property**: what the cameras and edge devices see and
+record in aggregate, how vehicles and patterns of movement look over time, and
+(optionally) what **Wi-Fi, Bluetooth, and BLE** passes through or near the site
+so you notice new or suspicious radio activity. It helps teams **see the
+site**, not run a NOC.
 
-**Use cases that this tool is designed for:**
+**Core use cases (in design order):**
 
-- Inventorying devices on networks you own or administer.
-- Auditing nearby RF / Wi-Fi / Bluetooth signals that are legally observable.
-- Operator-owned cameras (visible-light, IR/thermal, low-light) and sensors.
-- License-plate readers (LPR) on operator-owned property: edge-OCR plate
-  observations matched against an **operator-defined watchlist** (e.g.
-  "expected delivery vehicle", "neighbor", "no-trespass advisory"). Plates are
-  masked in the UI; no plate-to-owner lookups, no third-party plate-search.
-- Anonymous occupancy / presence counts per zone (people-shaped detections as
-  aggregated counts only — no faces, no identities, no per-person tracks).
-- Pattern detection: repeat vehicles, after-hours activity, unusual dwell,
-  recurring time-of-day visits — frequency analysis, not identification.
-- Tracking known cameras, sensors, access points, and fixed assets on a
-  private property map.
-- Flagging anomalies such as new unknown devices, rogue access points, or
-  sensors that drop offline.
-- Producing exec-readable reports and remediation checklists.
+- **Cameras & coverage** — Fixed assets on a map: visible, IR/thermal, LPR,
+  occupancy counters, door/sensor points; field of view and zones for the
+  **property**, not a data-center rack diagram.
+- **Movement & people (non-identifying)** — Motion and **anonymous
+  occupancy counts** per zone (people-shaped detections as bucketed totals
+  only — no faces, no identities, no per-person tracking).
+- **Vehicles at the edge** — License plate readers on **your** property: masked
+  plate, **vehicle class / make-style** fields where the pipeline provides them,
+  watchlist match (operator-defined: expected delivery, advisory, etc.). No
+  DMV or third-party plate-to-owner lookup.
+- **Cataloging & patterns** — Repeat visitors, after-hours activity, unusual
+  dwell, time-of-day habits — **frequency** and **catalog** views, not identity
+  dossiers.
+- **Ambient RF module** — Wi-Fi / Bluetooth / BLE **observed in or near the
+  environment** (e.g. strong unknown AP, BLE beacon persistence). This
+  complements physical sensors; it is **not** the primary story of “monitoring
+  your network” or server health.
+- **Optional LAN context** — Where you also administer on-site IT, you can
+  correlate with inventoried hosts on owned subnets; that remains **secondary**
+  to **property** security in product positioning.
+- **Documentation** — Drift from an approved baseline, incidents, operator
+  audit, and reports for oversight.
 
 **Not in scope (intentionally and permanently):**
 

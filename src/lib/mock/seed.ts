@@ -27,8 +27,8 @@ import type {
 import { chance, floatBetween, intBetween, mulberry32, pickFrom } from '@/lib/rand';
 
 // ────────────────────────────────────────────────────────────────────
-// Site geometry — fictional private campus near 47.6178, -122.1944
-// (a placeholder; this is mock data only).
+// Site geometry — fictional private yard / small industrial property near
+// 47.6178, -122.1944 (mock data only).
 // ────────────────────────────────────────────────────────────────────
 
 const SITE_CENTER: [number, number] = [-122.1944, 47.6178];
@@ -41,7 +41,7 @@ function offset(center: [number, number], dx: number, dy: number): [number, numb
 const site: Site = {
   id: 'site_north_yard',
   name: 'North Yard',
-  description: 'Private operations campus — primary site',
+  description: 'Private yard and buildings — primary North Yard site',
   center: SITE_CENTER,
   bounds: [offset(SITE_CENTER, -1.4, -1.0), offset(SITE_CENTER, 1.4, 1.0)],
   timezone: 'America/Los_Angeles',
@@ -91,7 +91,7 @@ const zones: Zone[] = [
   {
     id: 'z_ops_building',
     siteId: site.id,
-    name: 'Operations Building',
+    name: 'Main Building',
     kind: 'restricted',
     polygon: [
       offset(SITE_CENTER, -0.25, -0.05),
@@ -99,7 +99,7 @@ const zones: Zone[] = [
       offset(SITE_CENTER, 0.05, 0.15),
       offset(SITE_CENTER, -0.25, 0.15),
     ],
-    notes: 'Server room and SCIF. Card-access only.',
+    notes: 'Control room, secure storage, edge gear. Card access only.',
   },
   {
     id: 'z_visitor_lot',
@@ -423,7 +423,7 @@ function buildAssets(): Asset[] {
     zoneId: 'z_ops_building',
     vendor: 'Ubiquiti',
     model: 'U6-Pro',
-    tags: ['wifi', 'corp'],
+    tags: ['wifi', 'main'],
   });
   add({
     name: 'AP-OPS-02',
@@ -535,10 +535,10 @@ function buildAssets(): Asset[] {
 const assets = buildAssets();
 
 // ────────────────────────────────────────────────────────────────────
-// Signals — observed Wi-Fi / BT / BLE inventory
+// Signals — Wi-Fi / BT / BLE observed at or near the property
 // ────────────────────────────────────────────────────────────────────
 
-const SSIDS_KNOWN = ['NorthYard-Corp', 'NorthYard-Guest', 'NorthYard-IoT', 'NorthYard-Mgmt'];
+const SSIDS_KNOWN = ['NorthYard-Main', 'NorthYard-Visitor', 'NorthYard-IoT', 'NorthYard-Ops'];
 const SSIDS_AMBIENT = [
   'xfinitywifi',
   'ATT-WIFI-3329',
@@ -576,7 +576,7 @@ function buildSignals(): SignalObservation[] {
     return out;
   }
 
-  // Known infra (matches our APs)
+  // Site-approved SSIDs (match our on-property APs)
   for (const ssid of SSIDS_KNOWN) {
     list.push({
       id: `s_known_${ssid}`,
@@ -647,7 +647,7 @@ function buildSignals(): SignalObservation[] {
   list.push({
     id: 's_susp_1',
     siteId: site.id,
-    alias: 'NorthYard-Corp_5G',
+    alias: 'NorthYard-Main_5G',
     identifier: '00:13:37:··:··:af',
     band: 'wifi-5',
     type: 'access-point',
@@ -661,13 +661,14 @@ function buildSignals(): SignalObservation[] {
     trend: 0.62,
     anomalyScore: 84,
     anomalyScoreComponents: [
-      { id: 'c1', label: 'SSID similarity to inventory (score)', value: 0.91, pointsToward: 28 },
-      { id: 'c2', label: 'BSSID not in approved CMDB', value: 1, pointsToward: 22 },
-      { id: 'c3', label: 'RSSI in campus interior range (strong)', value: -71, pointsToward: 18 },
+      { id: 'c1', label: 'SSID similarity to site inventory (score)', value: 0.91, pointsToward: 28 },
+      { id: 'c2', label: 'BSSID not in approved site list', value: 1, pointsToward: 22 },
+      { id: 'c3', label: 'RSSI in main-building range (strong)', value: -71, pointsToward: 18 },
       { id: 'c4', label: '24h count trend (σ vs site)', value: 0.62, pointsToward: 16 },
     ],
     tags: ['ssid-similarity', 'rogue-candidate'],
-    notes: 'SSID resembles corporate network but BSSID is not in inventory. Candidate evil-twin AP.',
+    notes:
+      'SSID matches our main yard Wi-Fi naming but BSSID is not in the site inventory. Likely evil-twin or unapproved radio.',
     history: makeHistory(),
   });
   list.push({
@@ -687,7 +688,7 @@ function buildSignals(): SignalObservation[] {
     trend: 0.45,
     anomalyScore: 71,
     tags: ['hidden-ssid', 'esp32'],
-    notes: 'Hidden SSID on a low-power module. Persistent inside Operations Building footprint.',
+    notes: 'Hidden SSID on a low-power module. Persistent inside the main building footprint.',
     history: makeHistory(),
   });
   list.push({
@@ -716,14 +717,15 @@ function buildSignals(): SignalObservation[] {
 const signals = buildSignals();
 
 // ────────────────────────────────────────────────────────────────────
-// Network observations (assets the network team has authorized us to inventory)
+// Network observations — optional on-site LAN: hosts the site is allowed to inventory
+// (NVR, cameras, IoT gateway, etc.); not the core “network ops” product story.
 // ────────────────────────────────────────────────────────────────────
 
 const networkObservations: NetworkObservation[] = [
   {
     id: 'n_1',
     siteId: site.id,
-    hostname: 'ops-fileserver-01',
+    hostname: 'ny-nvr-01',
     ipMasked: '10.20.0.··',
     macMasked: 'b8:27:eb:··:··:14',
     vendorHint: 'Raspberry Pi',
@@ -758,7 +760,7 @@ const networkObservations: NetworkObservation[] = [
     lastSeen: new Date(Date.now() - 60 * 1000).toISOString(),
     classification: 'suspicious',
     openPorts: [80, 1883],
-    notes: 'Unmanaged ESP32 device found bridged onto IoT VLAN. Pending owner identification.',
+    notes: 'Unmanaged ESP32 on the site IoT segment. Pending owner identification.',
   },
   {
     id: 'n_4',
@@ -776,7 +778,7 @@ const networkObservations: NetworkObservation[] = [
   {
     id: 'n_5',
     siteId: site.id,
-    hostname: 'guest-vlan-leak',
+    hostname: 'visitor-laptop-orphan',
     ipMasked: '10.99.7.··',
     macMasked: 'f4:5c:89:··:··:0a',
     vendorHint: 'Apple',
@@ -785,7 +787,7 @@ const networkObservations: NetworkObservation[] = [
     lastSeen: new Date().toISOString(),
     classification: 'unknown',
     openPorts: [],
-    notes: 'Device on guest VLAN attempting mDNS lookups for corporate hostnames.',
+    notes: 'Device on visitor Wi-Fi segment probing internal hostnames via mDNS — possible misconfigured bridge or policy gap.',
   },
 ];
 
@@ -797,8 +799,8 @@ const alerts: Alert[] = [
   {
     id: 'al_1',
     siteId: site.id,
-    title: 'Possible evil-twin AP near Operations Building',
-    detail: 'SSID "NorthYard-Corp_5G" advertised by an unmanaged BSSID. Persistent over 4 days, rising signal strength.',
+    title: 'Possible evil-twin AP near main building',
+    detail: 'SSID "NorthYard-Main_5G" advertised by an unmanaged BSSID. Persistent over 4 days, rising signal strength.',
     severity: 'high',
     source: 'signal',
     acknowledged: false,
@@ -811,7 +813,7 @@ const alerts: Alert[] = [
     id: 'al_2',
     siteId: site.id,
     title: 'Hidden 2.4GHz beacon inside restricted zone',
-    detail: 'ESP32-class radio observed broadcasting from inside Operations Building. No matching asset.',
+    detail: 'ESP32-class radio observed broadcasting from inside the main building. No matching asset.',
     severity: 'critical',
     source: 'signal',
     acknowledged: false,
@@ -848,7 +850,7 @@ const alerts: Alert[] = [
   {
     id: 'al_5',
     siteId: site.id,
-    title: 'Unmanaged device on IoT VLAN',
+    title: 'Unmanaged device on site IoT segment',
     detail: 'ESP32 bridged onto 10.20.40.0/24 with no owner.',
     severity: 'high',
     source: 'network',
@@ -870,8 +872,8 @@ const alerts: Alert[] = [
   {
     id: 'al_7',
     siteId: site.id,
-    title: 'Guest VLAN device probing corporate names',
-    detail: 'mDNS queries for ops-fileserver-01 originating on guest VLAN.',
+    title: 'Visitor Wi-Fi host probing internal names',
+    detail: 'mDNS queries for ny-nvr-01 originating on the visitor Wi-Fi segment.',
     severity: 'medium',
     source: 'network',
     acknowledged: false,
@@ -891,7 +893,7 @@ const alerts: Alert[] = [
     id: 'al_9',
     siteId: site.id,
     title: 'Door propped: DOOR-OPS-MAIN',
-    detail: 'Operations main door reported open >120s during business hours.',
+    detail: 'Main building entry reported open >120s during business hours.',
     severity: 'low',
     source: 'sensor',
     acknowledged: true,
@@ -919,9 +921,9 @@ const incidents: Incident[] = [
   {
     id: 'inc_001',
     siteId: site.id,
-    title: 'Possible evil-twin AP — Operations',
+    title: 'Possible evil-twin AP — main building',
     summary:
-      'Suspicious AP advertising an SSID that mimics our corporate network. Persistent for several days inside the Operations Building footprint. Investigating.',
+      'Suspicious AP using an SSID that mimics our main yard Wi-Fi. Present for several days inside the main building footprint. Investigating.',
     severity: 'high',
     status: 'investigating',
     assignee: 'u_2',
@@ -935,9 +937,9 @@ const incidents: Incident[] = [
   {
     id: 'inc_002',
     siteId: site.id,
-    title: 'Unknown ESP32 on IoT VLAN',
+    title: 'Unknown ESP32 on site IoT segment',
     summary:
-      'Unmanaged microcontroller bridged onto IoT subnet with no documented owner. Possible bring-your-own device left behind by contractor.',
+      'Unmanaged microcontroller on the site IoT segment with no documented owner. Possible BYOD or contractor device left on the LAN.',
     severity: 'medium',
     status: 'open',
     assignee: 'u_3',
@@ -981,8 +983,8 @@ const incidents: Incident[] = [
   {
     id: 'inc_005',
     siteId: site.id,
-    title: 'Door propped — Operations main',
-    summary: 'Operations main door reported propped during yesterday afternoon. Reviewed CCTV — staff carrying equipment.',
+    title: 'Door propped — main entry',
+    summary: 'Main building door reported propped during yesterday afternoon. Reviewed CCTV — staff carrying equipment.',
     severity: 'low',
     status: 'resolved',
     assignee: 'u_2',
@@ -1013,7 +1015,7 @@ const evidence: EvidenceItem[] = [
     title: 'Beacon framing analysis',
     capturedAt: new Date(Date.now() - 8 * 3600000).toISOString(),
     capturedBy: 'u_2',
-    body: 'Beacon interval and capability bits differ from corporate APs (Ubiquiti). Likely consumer-grade radio.',
+    body: 'Beacon interval and capability bits differ from our site access points (Ubiquiti). Likely consumer-grade radio.',
   },
   {
     id: 'ev_003',
@@ -1079,10 +1081,10 @@ const baselineDiffs: BaselineDiff[] = [
     baselineId: 'bl_q1',
     kind: 'rogue-access-point',
     severity: 'high',
-    subject: 'NorthYard-Corp_5G (00:13:37:··:··:af)',
-    detail: 'Access point not present in baseline; SSID closely resembles corporate network.',
+    subject: 'NorthYard-Main_5G (00:13:37:··:··:af)',
+    detail: 'Access point not present in baseline; SSID closely resembles the approved main Wi-Fi name.',
     remediation:
-      'Locate emitter; if not authorized, take offline. File incident, rotate corp PSK if user data exposure suspected.',
+      'Locate the emitter; if it is not an approved on-site install, take it offline. If PSK or internal names could be exposed, rotate the main Wi-Fi passphrase per site policy.',
     detectedAt: new Date(Date.now() - 26 * 3600000).toISOString(),
     resolved: false,
   },
@@ -1092,8 +1094,9 @@ const baselineDiffs: BaselineDiff[] = [
     kind: 'unknown-network-device',
     severity: 'medium',
     subject: 'unknown-iot-44 (10.20.40.··)',
-    detail: 'New device on IoT VLAN with no inventory entry.',
-    remediation: 'Identify owner, add to inventory or remove from network. Verify VLAN segmentation policy.',
+    detail: 'New device on the site IoT segment with no inventory entry.',
+    remediation:
+      'Identify the owner, add the host to the site list or remove it. Re-check segment isolation at the edge gateway.',
     detectedAt: new Date(Date.now() - 4 * 3600000).toISOString(),
     resolved: false,
   },
@@ -1124,9 +1127,9 @@ const baselineDiffs: BaselineDiff[] = [
     baselineId: 'bl_q1',
     kind: 'exposed-service',
     severity: 'medium',
-    subject: 'ops-fileserver-01:3128',
-    detail: 'Caching proxy port reachable from broader IoT VLAN — was firewalled at baseline.',
-    remediation: 'Restore firewall rule; review change history on perimeter ACL.',
+    subject: 'ny-nvr-01:3128',
+    detail: 'Caching proxy on the edge NVR exposed from a broader IoT segment than at baseline — was firewalled before.',
+    remediation: 'Restore the segment rule; review change log on the edge gateway / ACLs.',
     detectedAt: new Date(Date.now() - 11 * 3600000).toISOString(),
     resolved: false,
   },
@@ -1221,7 +1224,7 @@ const reports: Report[] = [
     generatedBy: 'u_1',
     rangeFrom: '2026-04-01T00:00:00Z',
     rangeTo: '2026-04-18T00:00:00Z',
-    summary: 'Operating posture stable; one elevated incident under investigation (rogue AP candidate).',
+    summary: 'Perimeter and site security posture stable; one elevated incident under review (rogue-AP candidate).',
     sizeBytes: 482000,
   },
   {
@@ -1233,7 +1236,7 @@ const reports: Report[] = [
     generatedBy: 'u_3',
     rangeFrom: '2026-04-13T00:00:00Z',
     rangeTo: '2026-04-19T00:00:00Z',
-    summary: 'RF, network and sensor activity report. 5 incidents (1 high, 1 medium, 3 low).',
+    summary: 'RF, on-site host (optional LAN), and physical sensor report. 5 incidents (1 high, 1 medium, 3 low).',
     sizeBytes: 1840000,
   },
   {

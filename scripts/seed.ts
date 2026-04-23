@@ -16,7 +16,7 @@ console.log(fmt('site', 1));
 console.log(fmt('zones', mockStore.zones.length));
 console.log(fmt('assets', mockStore.assets.length));
 console.log(fmt('signal observations', mockStore.signals.length));
-console.log(fmt('network observations', mockStore.networkObservations.length));
+console.log(fmt('on-site host observations (LAN)', mockStore.networkObservations.length));
 console.log(fmt('alerts', mockStore.alerts.length));
 console.log(fmt('incidents', mockStore.incidents.length));
 console.log(fmt('evidence items', mockStore.evidence.length));

@@ -60,7 +60,7 @@ export default async function PatternsPage() {
   return (
     <PageContainer>
       <PageHeader
-        eyebrow="Awareness"
+        eyebrow="Sensors & edge"
         title="Patterns"
         description="Anonymous frequency analysis across cameras, sensors, and LPR — repeat-visitor detection, time-of-day heatmaps, after-hours presence. Counts and patterns only — never identities."
         meta={

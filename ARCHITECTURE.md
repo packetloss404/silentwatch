@@ -1,9 +1,15 @@
 # SilentWatch — Architecture notes
 
-Operator-grade defensive monitoring tool. The current scaffold is a
-fully-typed Next.js 14 frontend backed by an in-memory mock adapter. The
-adapter is intentionally narrow so a future FastAPI or NestJS backend can be
-substituted without UI changes.
+**Product focus:** the application is **property and perimeter security**:
+cameras, motion, anonymous people counts, vehicles (LPR and catalog-style
+fields), and patterns of activity. **Ambient RF and Wi-Fi/BLE** observation is
+a **module** (what passes the property line in radio terms). `NetworkObservation`
+in the data model is for **optional** on-site LAN / inventory correlation where
+an operator also runs IT; it is not the product’s primary narrative.
+
+The scaffold is a fully-typed Next.js 14 frontend backed by an in-memory mock
+adapter. The adapter is intentionally narrow so a future FastAPI or NestJS
+backend can be substituted without UI changes.
 
 ## Boundaries
 
