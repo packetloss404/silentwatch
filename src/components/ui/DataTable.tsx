@@ -19,6 +19,8 @@ interface DataTableProps<T> {
   rows: T[];
   rowKey: (row: T) => string;
   onRowClick?: (row: T) => void;
+  /** Screen reader + aria label for a row; defaults to `rowKey` string. */
+  getRowLabel?: (row: T) => string;
   selectedKey?: string;
   empty?: ReactNode;
   dense?: boolean;
@@ -30,6 +32,7 @@ export function DataTable<T>({
   rows,
   rowKey,
   onRowClick,
+  getRowLabel,
   selectedKey,
   empty,
   dense,
@@ -63,6 +66,7 @@ export function DataTable<T>({
           ) : (
             rows.map((row) => {
               const key = rowKey(row);
+              const label = (getRowLabel ?? ((r: T) => String(rowKey(r))))(row);
               return (
                 <tr
                   key={key}
@@ -70,7 +74,20 @@ export function DataTable<T>({
                     onRowClick && styles.clickable,
                     selectedKey === key && styles.selected,
                   )}
+                  tabIndex={onRowClick ? 0 : undefined}
+                  aria-selected={onRowClick ? selectedKey === key : undefined}
+                  aria-label={onRowClick ? `Open details for ${label}` : undefined}
                   onClick={onRowClick ? () => onRowClick(row) : undefined}
+                  onKeyDown={
+                    onRowClick
+                      ? (e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            onRowClick(row);
+                          }
+                        }
+                      : undefined
+                  }
                 >
                   {columns.map((c) => (
                     <td

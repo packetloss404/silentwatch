@@ -50,7 +50,7 @@ export function cameraFovPolygon(asset: Asset): Feature<Polygon> | null {
   points.push([lng, lat]);
   return {
     type: 'Feature',
-    properties: { id: asset.id, kind: 'camera-fov' },
+    properties: { id: asset.id, kind: 'camera-fov', assetType: asset.type },
     geometry: { type: 'Polygon', coordinates: [points] },
   };
 }

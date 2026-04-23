@@ -146,6 +146,7 @@ export function VehiclesView({ vehicles, watchlist, assets }: Props) {
             columns={cols}
             rows={filtered}
             rowKey={(r) => r.id}
+            getRowLabel={(r) => r.plateMasked}
             onRowClick={(r) => setSelectedId(r.id)}
             selectedKey={displaySelected}
           />

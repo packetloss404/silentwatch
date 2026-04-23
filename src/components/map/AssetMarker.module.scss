@@ -82,8 +82,9 @@
 .type-access-point  { color: $accent-violet; }
 .type-gateway       { color: $text-secondary; }
 .type-switch        { color: $text-secondary; }
-.type-door-controller { color: $accent-amber; }
-.type-vehicle       { color: $accent-amber; }
+/* Door vs LPR: both "access" but different hue so pins are not confused on the map. */
+.type-door-controller { color: $sev-high; }
+.type-vehicle       { color: $accent-green; }
 .type-building      { color: $text-tertiary; background: $bg-panel; border-style: dashed; }
 .type-entrance      { color: $accent-amber; }
 .type-beacon        { color: $accent-violet; }

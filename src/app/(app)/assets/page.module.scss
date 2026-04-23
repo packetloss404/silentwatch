@@ -5,10 +5,41 @@
   flex-wrap: wrap;
 }
 
-.aliasCell { display: flex; flex-direction: column; gap: 2px; }
+.aliasCell { display: flex; flex-direction: column; gap: $space-1; }
 .aliasName { color: $text-primary; font-weight: $fw-medium; font-size: $fs-sm; }
 .muted { color: $text-tertiary; font-size: $fs-xs; }
 .mono  { @include mono; font-size: $fs-xs; color: $text-secondary; }
+
+.typeLabel {
+  font-size: $fs-xs;
+  color: $text-secondary;
+  font-weight: $fw-medium;
+}
+
+.sensingCell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-1;
+  align-items: center;
+}
+
+.sensingChip {
+  font-size: $fs-2xs;
+  padding: 1px 6px;
+  border-radius: $radius-xs;
+  border: 1px solid $border-subtle;
+  color: $text-secondary;
+  background: $bg-panel-2;
+  white-space: nowrap;
+}
+
+.drawerTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $fs-md;
+  font-weight: $fw-semi;
+}
 
 .drawer {
   display: flex;
@@ -21,4 +52,5 @@
   font-size: $fs-sm;
   color: $text-secondary;
   line-height: $lh-snug;
+  max-width: 40rem;
 }

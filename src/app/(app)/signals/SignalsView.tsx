@@ -190,6 +190,7 @@ export function SignalsView({ signals, alerts }: { signals: SignalObservation[];
           columns={cols}
           rows={filtered}
           rowKey={(r) => r.id}
+          getRowLabel={(r) => r.alias}
           onRowClick={(r) => setSelectedId(r.id)}
           selectedKey={selectedId ?? undefined}
         />

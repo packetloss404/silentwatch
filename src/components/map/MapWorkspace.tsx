@@ -191,23 +191,43 @@ export function MapWorkspace({ site, zones, assets, signals, alerts }: Props) {
             </Source>
           )}
 
-          {/* Camera FOV cones */}
-          {layers.fovs && layers.cameras && (
+          {/* Camera / LPR / IR FOV cones — visible when FOVs on and at least one camera-like layer is on */}
+          {layers.fovs && (layers.cameras || layers.lpr || layers.ir) && (
             <Source id="fovs" type="geojson" data={fovGeo as any}>
               <Layer
                 id="fovs-fill"
                 type="fill"
                 paint={{
-                  'fill-color': '#4aa8c8',
-                  'fill-opacity': 0.06,
+                  'fill-color': [
+                    'match',
+                    ['get', 'assetType'],
+                    'lpr-camera',
+                    '#c89f4a',
+                    'ir-camera',
+                    '#c8584a',
+                    'camera',
+                    '#4aa8c8',
+                    '#4aa8c8',
+                  ],
+                  'fill-opacity': 0.07,
                 }}
               />
               <Layer
                 id="fovs-line"
                 type="line"
                 paint={{
-                  'line-color': '#4aa8c8',
-                  'line-opacity': 0.35,
+                  'line-color': [
+                    'match',
+                    ['get', 'assetType'],
+                    'lpr-camera',
+                    '#c89f4a',
+                    'ir-camera',
+                    '#c8584a',
+                    'camera',
+                    '#4aa8c8',
+                    '#4aa8c8',
+                  ],
+                  'line-opacity': 0.4,
                   'line-width': 1,
                   'line-dasharray': [3, 3],
                 }}
@@ -435,9 +455,12 @@ export function MapWorkspace({ site, zones, assets, signals, alerts }: Props) {
               <p>Click any asset to view its details, recent activity, and linked alerts.</p>
               <ul className={styles.legendList}>
                 <li><span className={styles.legendDot} style={{ background: '#4aa8c8' }} />Camera</li>
-                <li><span className={styles.legendDot} style={{ background: '#5fa37a' }} />Sensor</li>
-                <li><span className={styles.legendDot} style={{ background: '#8a7ac8' }} />Wi-Fi AP / Beacon</li>
-                <li><span className={styles.legendDot} style={{ background: '#c89f4a' }} />Door / Vehicle</li>
+                <li><span className={styles.legendDot} style={{ background: '#c89f4a' }} />LPR</li>
+                <li><span className={styles.legendDot} style={{ background: '#c8584a' }} />IR / thermal</li>
+                <li><span className={styles.legendDot} style={{ background: '#5fa37a' }} />Sensor / occupancy</li>
+                <li><span className={styles.legendDot} style={{ background: '#8a7ac8' }} />Wi-Fi AP / beacon</li>
+                <li><span className={styles.legendDot} style={{ background: '#d97c4a' }} />Door / access</li>
+                <li><span className={styles.legendDot} style={{ background: '#5fa37a' }} />Site vehicle</li>
                 <li><span className={styles.legendDot} style={{ background: '#c8584a' }} />Active alert</li>
               </ul>
             </div>

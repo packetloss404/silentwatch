@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .wrap {
   position: relative;
   display: inline-flex;
@@ -32,9 +34,9 @@
   }
 
   &:focus-visible {
-    border-color: rgba(74, 168, 200, 0.55);
+    border-color: color.change($accent-cyan, $alpha: 0.55);
     background: $bg-panel-2;
-    box-shadow: 0 0 0 3px rgba(74, 168, 200, 0.18);
+    box-shadow: 0 0 0 3px color.change($accent-cyan, $alpha: 0.18);
   }
 
   &::-webkit-search-cancel-button { display: none; }
